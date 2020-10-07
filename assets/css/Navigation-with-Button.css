@@ -200,4 +200,14 @@
 .navigation-clean-button.navbar-dark .action-button:hover {
   background: #269d9d;
 }
-
+.form-label-group{
+	text-align: center;
+	padding: 10px;
+	background: #550A6C;
+}
+.form-signin{
+	height: 600px;
+	width: 400px;
+	margin: 0 auto;
+	
+}

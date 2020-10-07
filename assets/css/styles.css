@@ -1,6 +1,21 @@
 img {
-  vertical-align: middle;
-  border-style: none;
-  object-fit: cover;
+	vertical-align: text-top;
+	border-style: none;
+	object-fit: cover;
+	border-left-width: 73px;
 }
 
+
+
+.form-signin{
+	height:5oopx;
+	padding: 100px 10px;
+}
+
+#avatar{
+	height:300px;
+	font-weight: 100;
+	border-radius:50%;
+	margin-bottom:30px;
+	padding: 50px 200px;
+}
