@@ -33,7 +33,23 @@
   <tbody>
     <tr>
       <td><img id="avatar" src="assets/img/avatar.jpg"  alt=""/><table width="200" border="1"></td>
-      <td><h1 align="center">Фамилия и Имя</h1></td>
+      <td><h1 align="center">Секрет: 
+
+          <?php 
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $mysqli = new mysqli($servername, $username, $password, "master");
+            $uname = $_SESSION['username'];
+
+            $result = $mysqli->query("SELECT * FROM `users`
+                                      WHERE `username` = '$uname'");
+
+            $row = $result->fetch_assoc();
+            echo $row['secret'];
+          ?>
+
+      </h1></td>
     </tr>
     <tr>
       <td><label></label></td>
