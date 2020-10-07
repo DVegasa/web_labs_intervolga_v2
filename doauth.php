@@ -13,7 +13,7 @@
         if ($users[$login] === $pass) {
             session_start();
             $_SESSION['username']=$login;
-            header("location: lk.php");
+            header("location: account.php");
 
         } else {
             echo "Неверный пароль";

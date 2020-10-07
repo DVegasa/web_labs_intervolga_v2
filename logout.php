@@ -1,6 +1,6 @@
 <?php
 session_start();
 session_destroy();
-header("Location: auth.php");
+header("Location: log-in.php");
 
 ?>

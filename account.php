@@ -12,6 +12,14 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+
+        <?php
+            session_start();
+            if (!isset($_SESSION['username'])) {
+                header('Location: log-in.php');
+            }
+        ?>
+
 <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="background: rgb(103,16,94);max-height: 59px;">
         <div class="container"><a class="navbar-brand" href="index.html" style="color: rgb(255,255,255);">MoneyBro</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
@@ -33,5 +41,11 @@
     </tr>
   </tbody>
 </table>
+
+    <div class="form-item"> 
+        <form method="POST" action="logout.php" class="reg-form">
+            <button type="submit" class="reg-form-item au-but">Выйти из аккаунта</button>
+        </form>
+    </div>
 
 </body>
