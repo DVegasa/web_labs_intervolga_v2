@@ -12,10 +12,103 @@ img {
 	padding: 100px 10px;
 }
 
-#avatar{
-	height:300px;
-	font-weight: 100;
-	border-radius:50%;
-	margin-bottom:30px;
-	padding: 50px 200px;
+
+.cabinet{
+	text-align:center;
+	margin-top:50px;
 }
+
+
+.cabinet_info{
+margin: 0 auto;
+}
+
+
+.name{
+ margin: 0 auto;
+	margin-top:15px;	
+    width:150px;
+	height:40px;
+	border:2px black solid;
+	border-radius:3px;
+	font-size:20px;
+     overflow-wrap: normal;  
+  word-wrap: normal;
+  word-break: normal; 
+  line-break: auto;  
+  background-color: #c7b39b;
+
+}
+
+.LONE{
+	 margin: 0 auto;
+	margin-top:15px;	
+    width:150px;
+	height:40px;
+	border:2px black solid;
+	border-radius:3px;
+	font-size:20px;
+     overflow-wrap: normal;  
+  word-wrap: normal;
+  word-break: normal; 
+  line-break: auto;  
+  hyphens: manual;  
+  width: 50%;
+  background-color: #c7b39b;
+}
+
+.LTWO{
+	 margin: 0 auto;
+	margin-top:15px;	
+    width:150px;
+	height:40px;
+	border:2px black solid;
+	border-radius:3px;
+	font-size:20px;
+     overflow-wrap: normal;  
+  word-wrap: normal;
+  word-break: normal; 
+  line-break: auto;  
+  hyphens: manual;  
+  width: 50%;
+  background-color: #c7b39b;
+}
+.center{
+	padding: 100px 10px;
+	text-align:center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
