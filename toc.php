@@ -46,14 +46,20 @@
                 $tocConfig->idPreffix = $_POST['idPreffix'];
                 $tocResult = getTocByResourceName($_POST['html'], $tocConfig);
                 
-                echo "Готовый TOC </br>";
-                echo htmlentities($tocResult->tocHtml);
-                echo "</br> </br> Обновлённый HTML </br> </br>";
-                echo htmlentities($tocResult->modifiedHtml);
+                if ($tocResult instanceof TocResult) {
+                    echo "Готовый TOC </br>";
+                    echo htmlentities($tocResult->tocHtml);
+                    echo "</br> </br> Обновлённый HTML </br> </br>";
+                    echo htmlentities($tocResult->modifiedHtml);
 
-                echo "</br> </br> </br> </br>";
-                echo $tocResult->tocHtml;
-                echo $tocResult->modifiedHtml;
+                    echo "</br> </br> </br> </br>";
+                    echo $tocResult->tocHtml;
+                    echo $tocResult->modifiedHtml;
+                    
+                } else if ($tocResult instanceof ErrorResult) {
+                    echo $tocResult->msg;
+                }
+                
             }
         ?>
 

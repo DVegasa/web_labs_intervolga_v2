@@ -7,6 +7,10 @@
     class TocResult {
         public $tocHtml, $modifiedHtml, $idPreffix;
     }
+
+    class ErrorResult {
+        public $msg;
+    }
     
     /**
      * @return HTML вёрстка оглавления
@@ -18,15 +22,26 @@
         $tocCfg = $tocConfig;
 
         if (!empty($rawHtml)) {
+            return getTocByHtmlSource($rawHtml, $tocConfig);
+        } else {
+            $er = new ErrorResult;
+            $er->msg = "Ошибка: такой файл не найден";
+            return $er;
+        }
+    }
+
+    function getTocByHtmlSource($htmlSrc, $tocConfig) {
+        $rawHtml = $htmlSrc;
+        global $tocCfg;
+        $tocCfg = $tocConfig;
+
+        if (!empty($rawHtml)) {
             $result = new TocResult;
             $result->tocHtml = getToc($rawHtml);
             $result->modifiedHtml = $rawHtml;
             return $result;
-        } else {
-            return "Ошибка: такой файл не найден";
         }
     }
-
 
 
     function getToc(&$html) {
