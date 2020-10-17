@@ -18,8 +18,8 @@
     <div class="center"> 
         <h2>Анкета</h2>
         <form method="POST">
-            <p>Введите имя:<br> 
-            <input type="text" name="name" /></p>
+            <p>Введите имя файла на сервере, без расширения файла:<br> 
+            <input type="text" name="html" /></p>
             <p>Максимальная вложенность: <br> 
                 <input type="radio" name="hLevel" value="h1" />h1 </br>
                 <input type="radio" name="hLevel" value="h2" />h2 </br>
@@ -31,12 +31,12 @@
         </form>
 
         <?php
-            if (isset($_POST['name']) && isset($_POST['hLevel'])) {
+            if (isset($_POST['html']) && isset($_POST['hLevel'])) {
                 require_once "laba3.php";
                 $tocConfig = new TocConfig;
-                $tocConfig->name = $_POST['name'];
+                $tocConfig->name = $_POST['html'];
                 $tocConfig->hLevel = $_POST['hLevel'];
-                echo getTocByHtml($_POST['name'], $tocConfig);
+                echo getTocByHtml($_POST['html'], $tocConfig);
             }
         ?>
 
