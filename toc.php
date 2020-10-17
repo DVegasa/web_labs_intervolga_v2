@@ -18,15 +18,19 @@
     <div> 
         <h2>Анкета</h2>
         <form method="POST">
-            <p>Введите имя файла на сервере, без расширения файла:<br> 
+            <p>Введите имя файла на сервере, без расширения файла<br> 
             <input type="text" name="html" /></p>
             <p>Максимальная вложенность: <br> 
-                <input type="radio" name="hLevel" value="1" />h1 </br>
-                <input type="radio" name="hLevel" value="2" />h2 </br>
-                <input type="radio" name="hLevel" value="3" />h3 </br>
-                <input type="radio" name="hLevel" value="4" />h4 </br>
-                <input type="radio" name="hLevel" value="5" />h5 </br>
-                <input type="radio" name="hLevel" value="6" />h6 </br>
+                <input required type="radio" name="hLevel" value="1" />h1 </br>
+                <input required type="radio" name="hLevel" value="2" />h2 </br>
+                <input required type="radio" name="hLevel" value="3" />h3 </br>
+                <input required type="radio" name="hLevel" value="4" />h4 </br>
+                <input required type="radio" name="hLevel" value="5" />h5 </br>
+                <input required checked type="radio" name="hLevel" value="6" />h6 </br>
+
+            <p>Префикс для сгенерированных id. По умолчанию, toc<br> 
+            <input required type="text" value="toc" name="idPreffix" /></p>
+
             <input type="submit" value="Выполнить">
         </form>
 
@@ -36,7 +40,11 @@
                 $tocConfig = new TocConfig;
                 $tocConfig->name = $_POST['html'];
                 $tocConfig->hLevel = $_POST['hLevel'];
-                $tocResult = getTocByHtml($_POST['html'], $tocConfig);
+                if (!isset($_POST['idPreffix']) || $_POST['idPreffix'] === "") {
+                    $_POST['idPreffix'] = 'toc';
+                }
+                $tocConfig->idPreffix = $_POST['idPreffix'];
+                $tocResult = getTocByResourceName($_POST['html'], $tocConfig);
                 
                 echo "Готовый TOC </br>";
                 echo htmlentities($tocResult->tocHtml);

@@ -5,14 +5,14 @@
     }
 
     class TocResult {
-        public $tocHtml, $modifiedHtml;
+        public $tocHtml, $modifiedHtml, $idPreffix;
     }
     
     /**
      * @return HTML вёрстка оглавления
      */
     $tocCfg;
-    function getTocByHtml($html, $tocConfig) {
+    function getTocByResourceName($html, $tocConfig) {
         $rawHtml = @file_get_contents("$html.html");  
         global $tocCfg;
         $tocCfg = $tocConfig;
@@ -26,6 +26,8 @@
             return "Ошибка: такой файл не найден";
         }
     }
+
+
 
     function getToc(&$html) {
         $headerPattern = "/<h([1-6]).?(.*?)<\/h.?>/";
@@ -93,11 +95,10 @@
         return $tocHtml;
     }
 
-    $generatedHTagIdPreffix = "toc";
     function getGeneratedHTagId() {
         static $idIndex = 1;
-        global $generatedHTagIdPreffix;
-        $id = $generatedHTagIdPreffix . $idIndex++;
+        global $tocCfg;
+        $id = $tocCfg->idPreffix . $idIndex++;
         return $id;
     }
 
