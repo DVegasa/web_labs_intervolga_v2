@@ -15,18 +15,18 @@
 
 
 <body>
-    <div class="center"> 
+    <div> 
         <h2>Анкета</h2>
         <form method="POST">
             <p>Введите имя файла на сервере, без расширения файла:<br> 
             <input type="text" name="html" /></p>
             <p>Максимальная вложенность: <br> 
-                <input type="radio" name="hLevel" value="h1" />h1 </br>
-                <input type="radio" name="hLevel" value="h2" />h2 </br>
-                <input type="radio" name="hLevel" value="h3" />h3 </br>
-                <input type="radio" name="hLevel" value="h4" />h4 </br>
-                <input type="radio" name="hLevel" value="h5" />h5 </br>
-                <input type="radio" name="hLevel" value="h6" />h6 </br>
+                <input type="radio" name="hLevel" value="1" />h1 </br>
+                <input type="radio" name="hLevel" value="2" />h2 </br>
+                <input type="radio" name="hLevel" value="3" />h3 </br>
+                <input type="radio" name="hLevel" value="4" />h4 </br>
+                <input type="radio" name="hLevel" value="5" />h5 </br>
+                <input type="radio" name="hLevel" value="6" />h6 </br>
             <input type="submit" value="Выполнить">
         </form>
 
@@ -37,6 +37,7 @@
                 $tocConfig->name = $_POST['html'];
                 $tocConfig->hLevel = $_POST['hLevel'];
                 $tocResult = getTocByHtml($_POST['html'], $tocConfig);
+                
                 echo "Готовый TOC </br>";
                 echo htmlentities($tocResult->tocHtml);
                 echo "</br> </br> Обновлённый HTML </br> </br>";

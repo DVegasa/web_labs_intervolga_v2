@@ -11,8 +11,12 @@
     /**
      * @return HTML вёрстка оглавления
      */
+    $tocCfg;
     function getTocByHtml($html, $tocConfig) {
         $rawHtml = @file_get_contents("$html.html");  
+        global $tocCfg;
+        $tocCfg = $tocConfig;
+
         if (!empty($rawHtml)) {
             $result = new TocResult;
             $result->tocHtml = getToc($rawHtml);
@@ -28,21 +32,24 @@
         preg_match_all($headerPattern, $html, $matches, PREG_OFFSET_CAPTURE + PREG_SET_ORDER);
         
         openTocHtml();
+        global $tocCfg;
         foreach ($matches as $hTag) {
             $fullTag = $hTag[0][0];
             $pos = $hTag[0][1];
             $hLevel = $hTag[1][0];
             $possibleName = $hTag[2][0];
-
-            $hTagId;
-            if (hasHTagId($fullTag)) {
-                $hTagId = getHTagId($fullTag);
-            } else {
-                $hTagId = getGeneratedHTagId();
-                addIdToHtml($html, $hTagId, $pos);
+            
+            if ($hLevel <= $tocCfg->hLevel) {
+                $hTagId;
+                if (hasHTagId($fullTag)) {
+                    $hTagId = getHTagId($fullTag);
+                } else {
+                    $hTagId = getGeneratedHTagId();
+                    addIdToHtml($html, $hTagId, $pos);
+                }
+                $name = getHTagName($possibleName);
+                addToToc($hTagId, $name, $hLevel);
             }
-            $name = getHTagName($possibleName);
-            addToToc($hTagId, $name, $hLevel);
         }
         return closeTocHtml();
     }
@@ -73,7 +80,7 @@
     function addToToc($id, $name, $hLevel) {
         $line = "";
         for ($i = 0; $i < $hLevel; $i++) {
-            $line .= "&nbsp;&nbsp;";
+            $line .= "&nbsp;&nbsp;&nbsp;&nbsp;";
         }
         $line .= '<a href="#'.$id.'">'.$name.'</a> </br>';
         global $tocHtml;
