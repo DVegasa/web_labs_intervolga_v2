@@ -36,7 +36,15 @@
                 $tocConfig = new TocConfig;
                 $tocConfig->name = $_POST['html'];
                 $tocConfig->hLevel = $_POST['hLevel'];
-                echo getTocByHtml($_POST['html'], $tocConfig);
+                $tocResult = getTocByHtml($_POST['html'], $tocConfig);
+                echo "Готовый TOC </br>";
+                echo htmlentities($tocResult->tocHtml);
+                echo "</br> </br> Обновлённый HTML </br> </br>";
+                echo htmlentities($tocResult->modifiedHtml);
+
+                echo "</br> </br> </br> </br>";
+                echo $tocResult->tocHtml;
+                echo $tocResult->modifiedHtml;
             }
         ?>
 
