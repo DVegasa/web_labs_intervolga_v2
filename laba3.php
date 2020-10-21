@@ -119,7 +119,7 @@
                 return ($errCode_unknownError);
         }
 
-        if ($userFile['size'] > 1000000) {
+        if ($userFile['size'] > 1500000) {
             return ($errCode_filesizeLimit);
         }
 

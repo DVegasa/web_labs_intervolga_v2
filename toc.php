@@ -30,7 +30,7 @@
             <input type="text" name="src" /></p>
 
             <p>Загрузите файл .html<br> 
-            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="1500000" />
             <input name="userfile" type="file" />
 
             <p>Максимальная вложенность: <br> 
