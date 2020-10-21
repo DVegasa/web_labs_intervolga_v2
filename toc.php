@@ -30,7 +30,7 @@
             <input type="text" name="src" /></p>
 
             <p>Загрузите файл .html<br> 
-            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+            <input type="hidden" name="MAX_FILE_SIZE" value="1000000" />
             <input name="userfile" type="file" />
 
             <p>Максимальная вложенность: <br> 
@@ -84,7 +84,7 @@
                 echo $tocResult->modifiedHtml;
                 
             } else if ($tocResult instanceof ErrorResult) {
-                echo $tocResult->msg;
+                echo "Ошибка: " . $tocResult->msg;
             }
         ?>
 

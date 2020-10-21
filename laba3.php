@@ -25,7 +25,7 @@
             return getTocByHtmlSource($rawHtml, $tocConfig);
         } else {
             $er = new ErrorResult;
-            $er->msg = "Ошибка: такой файл не найден";
+            $er->msg = "Файл не найден";
             return $er;
         }
     }
@@ -43,13 +43,18 @@
         }
     }
 
-
+    $errCode_invalidParam = 1;
+    $errCode_noFileSent = 2;
+    $errCode_filesizeLimit = 3;
+    $errCode_unknownError = 4;
+    $errCode_invalidParam = 5;
+    $errCode_invalidMime = 6;
 
     function getTocByHtmlFile($userFile, $tocConfig) {
         $errCode = fileCheck($userFile);
         if ($errCode !== 0) { // Значит файл не прошёл проверку
             $errorResult = new ErrorResult();
-            $errorResult->msg = "Ошибка при загрузке файла";
+            $errorResult->msg = getErrMsgByCode($errCode);
             return $errorResult;
             
         } else {
@@ -58,7 +63,75 @@
         }
     }
 
+    function getErrMsgByCode($errCode) {
+        global $errCode_invalidParam;
+        global $errCode_noFileSent;
+        global $errCode_filesizeLimit;
+        global $errCode_unknownError;
+        global $errCode_invalidParam;
+        global $errCode_invalidMime;
+
+        switch ($errCode) {
+            case 0:
+                return "";
+
+            case $errCode_invalidParam:
+                return "Некорректная загрузка";
+
+            case $errCode_noFileSent:
+                return "Файл не был отправлен";
+
+            case $errCode_filesizeLimit:
+                return "Превышен размер файла";
+
+            case $errCode_unknownError:
+                return "Неизвестная ошибка";
+
+            case $errCode_invalidParam:
+                return "Некорректная загрузка (некорректный параметр)";
+
+            case $errCode_invalidMime:
+                return "Недопустимый тип";
+        }
+    }
+
     function fileCheck($userFile) {
+        global $errCode_invalidParam;
+        global $errCode_noFileSent;
+        global $errCode_filesizeLimit;
+        global $errCode_unknownError;
+        global $errCode_invalidParam;
+        global $errCode_invalidMime;
+
+        if (!isset($userFile['error']) || is_array($userFile['error'])) {
+            return ($errCode_phpError);
+        }
+
+        switch ($userFile['error']) {
+            case UPLOAD_ERR_OK:
+                break;
+            case UPLOAD_ERR_NO_FILE:
+                return ($errCode_noFileSent);
+            case UPLOAD_ERR_INI_SIZE:
+            case UPLOAD_ERR_FORM_SIZE:
+                return ($errCode_filesizeLimit);
+            default:
+                return ($errCode_unknownError);
+        }
+
+        if ($userFile['size'] > 1000000) {
+            return ($errCode_filesizeLimit);
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $userFile['tmp_name']);
+        if ($mime != 'text/html') {
+            finfo_close($finfo);
+            return ($errCode_invalidMime);
+        } else {
+            finfo_close($finfo);
+        }
+
         return 0;
     }
 
