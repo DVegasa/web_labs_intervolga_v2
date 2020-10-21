@@ -18,8 +18,16 @@
     <div> 
         <h2>Анкета</h2>
         <form method="POST">
+            <p>Тип ввода<br> 
+                <input required type="radio" name="inputType" value="onSite" />Файл на сервере </br>
+                <input required type="radio" name="inputType" value="source" />Исходник </br>
+
             <p>Введите имя файла на сервере, без расширения файла<br> 
             <input type="text" name="html" /></p>
+
+            <p>Вставьте Исходник<br> 
+            <input type="text" name="src" /></p>
+
             <p>Максимальная вложенность: <br> 
                 <input required type="radio" name="hLevel" value="1" />h1 </br>
                 <input required type="radio" name="hLevel" value="2" />h2 </br>
@@ -35,31 +43,40 @@
         </form>
 
         <?php
-            if (isset($_POST['html']) && isset($_POST['hLevel'])) {
-                require_once "laba3.php";
-                $tocConfig = new TocConfig;
-                $tocConfig->name = $_POST['html'];
-                $tocConfig->hLevel = $_POST['hLevel'];
-                if (!isset($_POST['idPreffix']) || $_POST['idPreffix'] === "") {
-                    $_POST['idPreffix'] = 'toc';
-                }
-                $tocConfig->idPreffix = $_POST['idPreffix'];
-                $tocResult = getTocByResourceName($_POST['html'], $tocConfig);
-                
-                if ($tocResult instanceof TocResult) {
-                    echo "Готовый TOC </br>";
-                    echo htmlentities($tocResult->tocHtml);
-                    echo "</br> </br> Обновлённый HTML </br> </br>";
-                    echo htmlentities($tocResult->modifiedHtml);
+            if (!isset($_POST['hLevel'])) {
+                return;
+            }
 
-                    echo "</br> </br> </br> </br>";
-                    echo $tocResult->tocHtml;
-                    echo $tocResult->modifiedHtml;
-                    
-                } else if ($tocResult instanceof ErrorResult) {
-                    echo $tocResult->msg;
-                }
+            require_once "laba3.php";
+            $tocConfig = new TocConfig;
+            $tocConfig->hLevel = $_POST['hLevel'];
+            if (!isset($_POST['idPreffix']) || $_POST['idPreffix'] === "") {
+                $_POST['idPreffix'] = 'toc';
+            }
+            $tocConfig->idPreffix = $_POST['idPreffix'];
+
+            $tocResult;
+            if ($_POST['inputType'] === 'source') {
+                $tocResult = getTocByHtmlSource($_POST['src'], $tocConfig);
+
+            } else {
+                $tocConfig->name = $_POST['html'];
+                $tocResult = getTocByResourceName($_POST['html'], $tocConfig);
+            }
+
+            
+            if ($tocResult instanceof TocResult) {
+                echo "Готовый TOC </br>";
+                echo htmlentities($tocResult->tocHtml);
+                echo "</br> </br> Обновлённый HTML </br> </br>";
+                echo htmlentities($tocResult->modifiedHtml);
+
+                echo "</br> </br> </br> </br>";
+                echo $tocResult->tocHtml;
+                echo $tocResult->modifiedHtml;
                 
+            } else if ($tocResult instanceof ErrorResult) {
+                echo $tocResult->msg;
             }
         ?>
 

@@ -1,11 +1,11 @@
 <?php
 
     class TocConfig {
-        public $name, $hLevel;
+        public $name, $hLevel, $idPreffix;
     }
 
     class TocResult {
-        public $tocHtml, $modifiedHtml, $idPreffix;
+        public $tocHtml, $modifiedHtml;
     }
 
     class ErrorResult {
