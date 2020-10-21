@@ -39,12 +39,15 @@
                 <label> <input required type="radio" name="hLevel" value="3" />h3 </label> &nbsp;
                 <label> <input required type="radio" name="hLevel" value="4" />h4 </label> &nbsp;
                 <label> <input required type="radio" name="hLevel" value="5" />h5 </label> &nbsp;
-                <label> <input required checked type="radio" name="hLevel" value="6" />h6 </label> &nbsp;
+                <label> <input required checked type="radio" name="hLevel" value="6" />h6 </label> &nbsp; 
 
             <p>Префикс для сгенерированных id. По умолчанию, toc<br> 
             <input required type="text" value="toc" name="idPreffix" /></p>
 
-            <input type="submit" class="btn btn-primary" value="Выполнить">
+            <label> <input type="checkbox" name="renderHtml" value="1"> 
+            Срендерить модифицированную страничку на этой странице</label>
+
+            <br><input type="submit" class="btn btn-primary" value="Выполнить">
         </form>
         &nbsp;
         <?php
@@ -89,6 +92,10 @@
                     echo "</br></br> <h3> Модифицированный HTML </h3> ";
                     echo htmlentities($tocResult->modifiedHtml);
                     
+                    if ($_POST['renderHtml'] === '1') {
+                        echo '</br></br>-------------------R E N D E R-----------------------------</br></br>';
+                        echo $tocResult->modifiedHtml;
+                    }
                 } else if ($tocResult instanceof ErrorResult) {
                     echo "Ошибка: " . $tocResult->msg;
                 }
