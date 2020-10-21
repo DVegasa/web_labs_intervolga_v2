@@ -44,6 +44,25 @@
     }
 
 
+
+    function getTocByHtmlFile($userFile, $tocConfig) {
+        $errCode = fileCheck($userFile);
+        if ($errCode !== 0) { // Значит файл не прошёл проверку
+            $errorResult = new ErrorResult();
+            $errorResult->msg = "Ошибка при загрузке файла";
+            return $errorResult;
+            
+        } else {
+            $srcHtml = file_get_contents($userFile['tmp_name']); 
+            return getTocByHtmlSource($srcHtml, $tocConfig);
+        }
+    }
+
+    function fileCheck($userFile) {
+        return 0;
+    }
+
+
     function getToc(&$html) {
         $headerPattern = "/<h([1-6]).?(.*?)<\/h.?>/";
         preg_match_all($headerPattern, $html, $matches, PREG_OFFSET_CAPTURE + PREG_SET_ORDER);

@@ -17,16 +17,21 @@
 <body>
     <div> 
         <h2>Анкета</h2>
-        <form method="POST">
+        <form enctype="multipart/form-data" method="POST">
             <p>Тип ввода<br> 
                 <input required type="radio" name="inputType" value="onSite" />Файл на сервере </br>
                 <input required type="radio" name="inputType" value="source" />Исходник </br>
+                <input required type="radio" name="inputType" value="htmlFile" />HTML файл </br>
 
             <p>Введите имя файла на сервере, без расширения файла<br> 
             <input type="text" name="html" /></p>
 
             <p>Вставьте Исходник<br> 
             <input type="text" name="src" /></p>
+
+            <p>Загрузите файл .html<br> 
+            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+            <input name="userfile" type="file" />
 
             <p>Максимальная вложенность: <br> 
                 <input required type="radio" name="hLevel" value="1" />h1 </br>
@@ -59,9 +64,12 @@
             if ($_POST['inputType'] === 'source') {
                 $tocResult = getTocByHtmlSource($_POST['src'], $tocConfig);
 
-            } else {
+            } else if ($_POST['inputType'] === 'onSite'){
                 $tocConfig->name = $_POST['html'];
                 $tocResult = getTocByResourceName($_POST['html'], $tocConfig);
+
+            } else {
+                $tocResult = getTocByHtmlFile($_FILES['userfile'], $tocConfig);
             }
 
             
