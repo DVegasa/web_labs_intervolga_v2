@@ -65,12 +65,80 @@
                   </br>
       <div class="form-item">
         <form method="POST" action="logout.php" class="reg-form">
-          <button type="submit" class="reg-form-item au-but">Выйти из аккаунта</button>
+          <button type="submit" class="reg-form-item au-but">Выйти из аккаунта        </button>
+
         </form>
       </div>
 
-   </div>
    
+   
+<p>&nbsp;</p>
+  <form id="form_viz" name="form1" method="post">
+    <table id="Table1">
+<tr>
+<td class="cell0"><p >День Визита</p></td>
+<td class="cell0"><p >Месяц</p></td>
+<td class="cell0"><p >Время</p></td>
+<td class="cell0"><p >Сумма обмена</p></td>
+<td class="cell0"><p >Валюта</p></td>
+<td class="cell0"><p >Сумма получения</p></td>
+<td class="cell0"><p >Валюта</p></td>
+<td class="cell0"><p >Статус</p></td>
+</tr>
+<tr>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+<td class="cell0"><p >&nbsp;</p></td>
+</tr>
+</table>
+  </form>
+</div>
+<br>
+<div id="form0">
+<h1>Запланируйте визит</h1>
+	<br>
+<label>Веберите дату визита</label>
+<input type="date" required>
+<br>
+<label>Веберите время визита</label>
+<input type="time" required>
+<br>
+	<br>
+<label class="textic">Введите сумму для перевода</label>
+<br>
+	<br>
+<input type="number" required>
+
+<select name="Combobox" size="1" >
+	<option value="">USD</option>
+	<option>EUR</option>
+	<option>GBP</option>
+	<option>JPY</option>
+	<option>CHF</option>
+	<option>RUB</option>
+</select>
+	<label>-------></label>
+<label>Здесь будет число</label>
+<select name="Combobox" size="1" >
+	<option value="">USD</option>
+	<option>EUR</option>
+	<option>GBP</option>
+	<option>JPY</option>
+	<option>CHF</option>
+	<option>RUB</option>
+</select>
+<br>
+<br>
+<button id="bt">Запланировать</button>
+</div>
+
+
+
 
 
 </body>
