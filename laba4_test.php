@@ -36,8 +36,22 @@
 
     ==================================== <br>
     <?php
-        require_once "db_users.php";
-        print_r(getUserIdByName("dvegasa"));
+        require_once "visit_presenter.php";
+        if (
+            isset($_POST['curFrom']) &&
+            isset($_POST['sumFrom']) &&
+            isset($_POST['curTo']) &&
+            isset($_POST['date']) &&
+            isset($_POST['time'])
+        ) {
+            $result = createVisit(
+                $_POST['curFrom'],
+                $_POST['sumFrom'],
+                $_POST['curTo'],
+                $_POST['date'],
+                $_POST['time']
+            )
+        }
     ?>
 
     </div>

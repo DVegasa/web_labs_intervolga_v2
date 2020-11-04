@@ -16,7 +16,7 @@ function getCurrentUserId() {
 
 function getUserName() {
     if (!isUserAuthed) throw new UserNotAuthed();
-    return $_SESSION['username'];
+    return strtolower($_SESSION['username']);
 }
 
 ?>
