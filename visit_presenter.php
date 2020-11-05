@@ -18,6 +18,8 @@ function addVisit($date, $time, $sumFrom, $curFrom, $curTo)
         header("location: log-in.php");
         return $result_errNotAuth;
     }
+
+    return addVisitDb($uid, $sumFrom, $curFrom, $curTo, $date, $time, 1);
 }
 
 function getAllVisitsForCurrentUser()

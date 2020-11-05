@@ -71,7 +71,18 @@
     </div>
     <p>&nbsp;</p>
     <table id="Table1">
-      <tr>
+      
+
+      <?php
+      require_once "visit_presenter.php";
+      $visits = getAllVisitsForCurrentUser();
+      $v = $visits->fetch_assoc();
+
+      if ($v === NULL) {
+        echo "Запланированные визиты отсутствуют<br><br>";
+      } else {
+        echo '
+        <tr>
         <td class="cell0">
           <p>&nbsp;&nbsp;&nbsp;Дата&nbsp;&nbsp;&nbsp;</p>
         </td>
@@ -88,11 +99,8 @@
           <p>&nbsp;&nbsp;&nbsp;Статус&nbsp;&nbsp;&nbsp;</p>
         </td>
       </tr>
-
-      <?php
-      require_once "visit_presenter.php";
-      $visits = getAllVisitsForCurrentUser();
-      $v = $visits->fetch_assoc();
+        ';
+      }
 
       while ($v !== NULL) {
         $date = $v['date'];
@@ -144,7 +152,7 @@
       <br>
       <input type="number" name="sumFrom" required>
       <select name="curFrom" size="1">
-        <option value="">USD</option>
+        <option>USD</option>
         <option>EUR</option>
         <option>GBP</option>
         <option>JPY</option>
@@ -153,7 +161,7 @@
       </select>
       <label>--></label>
       <select name="curTo" size="1">
-        <option value="">USD</option>
+        <option>USD</option>
         <option>EUR</option>
         <option>GBP</option>
         <option>JPY</option>
@@ -175,6 +183,13 @@
     isset($_POST['curTo'])
   ) {
     require_once "visit_presenter.php";
+
+    print_r($_POST['date']); echo "<br><br>";
+    print_r($_POST['time']); echo "<br><br>";
+    print_r($_POST['sumFrom']); echo "<br><br>";
+    print_r($_POST['curFrom']); echo "<br><br>";
+    print_r($_POST['curTo']); echo "<br><br>";
+    
     $result = addVisit(
       $_POST['date'],
       $_POST['time'],
@@ -182,7 +197,9 @@
       $_POST['curFrom'],
       $_POST['curTo']
     );
-
+    
+    echo "####" . $result; 
+    return;
     if ($result == 0) { // OK
       @header("Refresh:0"); // Перезагрузим страницу, чтобы обновить данные
     } else { // Error 
