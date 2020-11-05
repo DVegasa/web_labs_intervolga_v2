@@ -70,107 +70,141 @@
       </form>
     </div>
 
-
+    <?php
+    require_once "visit_presenter.php";
+    $result = getAllVisitsForCurrentUser();
+    print_r($result->fetch_row());
+    echo "<br><br>";
+    print_r($result->fetch_row());
+    echo "<br><br>";
+    print_r($result->fetch_row());
+    echo "<br><br>";
+    print_r($result->fetch_row());
+    echo "<br><br>";
+    print_r($result->fetch_row());
+    echo "<br><br>";
+    echo "<br><br>";
+    ?>
 
     <p>&nbsp;</p>
-    <form id="form_viz" name="form1" method="post">
-      <table id="Table1">
-        <tr>
-          <td class="cell0">
-            <p>День Визита</p>
-          </td>
-          <td class="cell0">
-            <p>Месяц</p>
-          </td>
-          <td class="cell0">
-            <p>Время</p>
-          </td>
-          <td class="cell0">
-            <p>Сумма обмена</p>
-          </td>
-          <td class="cell0">
-            <p>Валюта</p>
-          </td>
-          <td class="cell0">
-            <p>Сумма получения</p>
-          </td>
-          <td class="cell0">
-            <p>Валюта</p>
-          </td>
-          <td class="cell0">
-            <p>Статус</p>
-          </td>
-        </tr>
-        <tr>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-          <td class="cell0">
-            <p>&nbsp;</p>
-          </td>
-        </tr>
-      </table>
+    <table id="Table1">
+      <tr>
+        <td class="cell0">
+          <p>День Визита</p>
+        </td>
+        <td class="cell0">
+          <p>Месяц</p>
+        </td>
+        <td class="cell0">
+          <p>Время</p>
+        </td>
+        <td class="cell0">
+          <p>Сумма обмена</p>
+        </td>
+        <td class="cell0">
+          <p>Валюта</p>
+        </td>
+        <td class="cell0">
+          <p>Сумма получения</p>
+        </td>
+        <td class="cell0">
+          <p>Валюта</p>
+        </td>
+        <td class="cell0">
+          <p>Статус</p>
+        </td>
+      </tr>
+      <tr>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+        <td class="cell0">
+          <p>&nbsp;</p>
+        </td>
+      </tr>
+    </table>
   </div>
 
-  <br>
-  <div id="form0">
-    <h1>Запланируйте визит</h1>
+  <form id="form_viz" name="form1" method="POST">
     <br>
-    <label>Веберите дату визита</label>
-    <input type="date" required>
-    <br>
-    <label>Веберите время визита</label>
-    <input type="time" required>
-    <br>
-    <br>
-    <label>Введите сумму для перевода и валюту конвертации
-      (точный курс будет известен во время визита)</label>
-    <br>
-    <input type="number" required>
-
-    <select name="curFrom" size="1">
-      <option value="">USD</option>
-      <option>EUR</option>
-      <option>GBP</option>
-      <option>JPY</option>
-      <option>CHF</option>
-      <option>RUB</option>
-    </select>
-    <label>--></label>
-    <select name="curTo" size="1">
-      <option value="">USD</option>
-      <option>EUR</option>
-      <option>GBP</option>
-      <option>JPY</option>
-      <option>CHF</option>
-      <option>RUB</option>
-    </select>
-    <br>
-    <br>
-    <button id="bt">Запланировать</button>
-  </div>
-
+    <div id="form0">
+      <h1>Запланируйте визит</h1>
+      <br>
+      <label>Веберите дату визита</label>
+      <input type="date" name="date" required>
+      <br>
+      <label>Веберите время визита</label>
+      <input type="time" name="time" required>
+      <br>
+      <br>
+      <label>Введите сумму для перевода и валюту конвертации
+        (точный курс будет известен во время визита)</label>
+      <br>
+      <input type="number" name="sumFrom" required>
+      <select name="curFrom" size="1">
+        <option value="">USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>JPY</option>
+        <option>CHF</option>
+        <option>RUB</option>
+      </select>
+      <label>--></label>
+      <select name="curTo" size="1">
+        <option value="">USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>JPY</option>
+        <option>CHF</option>
+        <option>RUB</option>
+      </select>
+      <br>
+      <br>
+      <button id="bt" type="submit">Запланировать</button>
+    </div>
   </form>
 
+  <?php
+  if (
+    isset($_POST['date']) &&
+    isset($_POST['time']) &&
+    isset($_POST['sumFrom']) &&
+    isset($_POST['curFrom']) &&
+    isset($_POST['curTo'])
+  ) {
+    require_once "visit_presenter.php";
+    $result = addVisit(
+      $_POST['date'],
+      $_POST['time'],
+      $_POST['sumFrom'],
+      $_POST['curFrom'],
+      $_POST['curTo']
+    );
 
+    if ($result == 0) { // OK
+      @header("Refresh:0"); // Перезагрузим страницу, чтобы обновить данные
+    } else { // Error 
 
+    }
+  }
+  ?>
 
 </body>
