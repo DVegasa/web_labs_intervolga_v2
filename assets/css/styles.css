@@ -83,6 +83,16 @@ margin: 0 auto;
 .begin{
 	padding-left: 24px;
 }
+
+input:invalid+span:after {
+    content: '✖';
+    padding-left: 5px;
+}
+
+input:valid+span:after {
+    content: '✓';
+    padding-left: 5px;
+
 .cell0{
 	font-size:13px;
 	line-height:16px;
@@ -117,4 +127,5 @@ margin-left: -100px;
 position: absolute; 
 left: 45%;
 margin-left: -100px;
+
 }
