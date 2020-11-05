@@ -16,6 +16,9 @@ img {
 .cabinet{
 	text-align:center;
 	margin-top:50px;
+		background-color: #FBFBFB;
+   border: 2px solid #CCCCCC;
+   border-radius: 27px;
 }
 
 
@@ -79,4 +82,50 @@ margin: 0 auto;
 }
 .begin{
 	padding-left: 24px;
+}
+
+input:invalid+span:after {
+    content: '✖';
+    padding-left: 5px;
+}
+
+input:valid+span:after {
+    content: '✓';
+    padding-left: 5px;
+}
+.cell0{
+	font-size:13px;
+	line-height:16px;
+	color:#000000;
+}
+#form0{
+	width: 700px;
+	margin: 0 auto;
+	padding-top:100px;
+	position: relative;
+	background-color: #FBFBFB;
+   border: 2px solid #CCCCCC;
+   border-radius: 27px;
+	padding:60px;
+	
+}
+#bt{
+	width: 200px;
+position: absolute; 
+left: 45%;
+margin-left: -100px;
+}
+
+#bt{
+	width: 200px;
+position: absolute; 
+left: 45%;
+margin-left: -100px;
+}
+.textic{
+	width: 400px;
+position: absolute; 
+left: 45%;
+margin-left: -100px;
+
 }
