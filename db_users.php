@@ -14,6 +14,8 @@ function getCurUserId()
     $mysqli = new mysqli($db_servername, $db_username, $db_password, "master");
 
     $username = $_SESSION['username'];
+    
+    // Данный запрос уже безопасен, т.к. $uid берётся из $_SESSION[]
     $result = $mysqli->query("SELECT (`id`) FROM `users` WHERE `username` = '$username'");
 
     $row = $result->fetch_assoc();

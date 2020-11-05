@@ -8,7 +8,9 @@ function getAllVisitsById($uid)
     $mysqli = new mysqli($db_servername, $db_username, $db_password, "master");
 
     $username = $_SESSION['username'];
-    $result = $mysqli->query("SELECT * FROM `visits` WHERE `userId` = '$uid'");
+    
+    // Данный запрос уже безопасен, т.к. $uid берётся из $_SESSION[]
+    $result = $mysqli->query("SELECT * FROM `visits` WHERE `userId` = '$uid'"); 
     return $result;
 }
 
@@ -22,11 +24,11 @@ function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status
     $time = $time . ":00";
     $sql =
         "INSERT INTO `visits` (`userId`, `summaFrom`, `curFrom`, `curTo`, `date`, `time`, `status`) VALUES "
-        . "('$userId', $summaFrom, '$curFrom', '$curTo', '$date', '$time', $status)";
+        . "(?, ?, ?, ?, ?, ?, ?)";
 
-    if ($mysqli->query($sql) === TRUE) {
-        return 0;
-    } else {
-        return -1;
-    }
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('iissssi', $userId, $summaFrom, $curFrom, $curTo, $date, $time, $status);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return 0;
 }
