@@ -69,77 +69,61 @@
 
       </form>
     </div>
-
-    <?php
-    require_once "visit_presenter.php";
-    $result = getAllVisitsForCurrentUser();
-    print_r($result->fetch_row());
-    echo "<br><br>";
-    print_r($result->fetch_row());
-    echo "<br><br>";
-    print_r($result->fetch_row());
-    echo "<br><br>";
-    print_r($result->fetch_row());
-    echo "<br><br>";
-    print_r($result->fetch_row());
-    echo "<br><br>";
-    echo "<br><br>";
-    ?>
-
     <p>&nbsp;</p>
     <table id="Table1">
       <tr>
         <td class="cell0">
-          <p>День Визита</p>
+          <p>&nbsp;&nbsp;&nbsp;Дата&nbsp;&nbsp;&nbsp;</p>
         </td>
         <td class="cell0">
-          <p>Месяц</p>
+          <p>&nbsp;&nbsp;&nbsp;Сумма к обмену&nbsp;&nbsp;&nbsp;</p>
         </td>
         <td class="cell0">
-          <p>Время</p>
+          <p>&nbsp;&nbsp;&nbsp;Исходная валюта&nbsp;&nbsp;&nbsp;</p>
         </td>
         <td class="cell0">
-          <p>Сумма обмена</p>
+          <p>&nbsp;&nbsp;&nbsp;Перевод в&nbsp;&nbsp;&nbsp;</p>
         </td>
         <td class="cell0">
-          <p>Валюта</p>
-        </td>
-        <td class="cell0">
-          <p>Сумма получения</p>
-        </td>
-        <td class="cell0">
-          <p>Валюта</p>
-        </td>
-        <td class="cell0">
-          <p>Статус</p>
+          <p>&nbsp;&nbsp;&nbsp;Статус&nbsp;&nbsp;&nbsp;</p>
         </td>
       </tr>
-      <tr>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
-        <td class="cell0">
-          <p>&nbsp;</p>
-        </td>
+
+      <?php
+      require_once "visit_presenter.php";
+      $visits = getAllVisitsForCurrentUser();
+      $v = $visits->fetch_assoc();
+
+      while ($v !== NULL) {
+        $date = $v['date'];
+        $time = $v['time'];
+        $summaFrom = $v['summaFrom'];
+        $curFrom = $v['curFrom'];
+        $curTo = $v['curTo'];
+        $status = statusByCode($v['status']);
+
+        echo '
+          <tr>
+          <td class="cell0">
+            <p>' . $date . ' ' . $time . '</p>
+          </td>
+          <td class="cell0">
+            <p>' . $summaFrom . '</p>
+          </td>
+          <td class="cell0">
+            <p>' . $curFrom . '</p>
+          </td>
+          <td class="cell0">
+            <p>' . $curTo . '</p>
+          </td>
+          <td class="cell0">
+            <p>' . $status . '</p>
+          </td>
       </tr>
+        ';
+        $v = $visits->fetch_assoc();
+      }
+      ?>
     </table>
   </div>
 

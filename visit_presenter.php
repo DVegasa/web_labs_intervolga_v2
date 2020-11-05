@@ -18,11 +18,10 @@ function addVisit($date, $time, $sumFrom, $curFrom, $curTo)
         header("location: log-in.php");
         return $result_errNotAuth;
     }
-    
-    
 }
 
-function getAllVisitsForCurrentUser() {
+function getAllVisitsForCurrentUser()
+{
     require_once "db_visits.php";
     require_once "db_users.php";
 
@@ -35,4 +34,14 @@ function getAllVisitsForCurrentUser() {
     }
 
     return getAllVisitsById($uid);
+}
+
+function statusByCode($status) {
+    switch ($status){
+        case 1: return "Запланирован";
+        case 2: return "Идёт сейчас...";
+        case 3: return "Завершён";
+        case 4: return "Отменён";
+        default: return "Неизвестен";
+    }
 }
