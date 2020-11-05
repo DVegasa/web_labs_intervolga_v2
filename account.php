@@ -142,15 +142,18 @@
       <br>
       <label>Веберите дату визита</label>
       <input type="date" name="date" id="date1" required>
+	    <span class="validity"></span>
       <br>
       <label>Веберите время визита</label>
       <input type="time" name="time" required>
+	    <span class="validity"></span>
       <br>
       <br>
       <label>Введите сумму для перевода и валюту конвертации
         (точный курс будет известен во время визита)</label>
       <br>
       <input type="number" name="sumFrom" min="0" required>
+	    <span class="validity"></span>
       <select name="curFrom" size="1">
         <option>USD</option>
         <option>EUR</option>
