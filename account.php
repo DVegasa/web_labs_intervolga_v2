@@ -74,7 +74,7 @@
       
 
       <?php
-      require_once "visit_presenter.php";
+      require_once "get_visits.php";
       $visits = getAllVisitsForCurrentUser();
       $v = $visits->fetch_assoc();
 
