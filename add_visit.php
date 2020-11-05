@@ -6,7 +6,7 @@ if (
   isset($_POST['curFrom']) &&
   isset($_POST['curTo'])
 ) {
-  require_once "visit_presenter.php";
+  require_once "get_visits.php";
 
   $result = addVisit(
     $_POST['date'],
