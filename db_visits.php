@@ -23,8 +23,8 @@ function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status
         . "('$userId', $summaFrom, '$curFrom', '$curTo', '$date', '$time', $status)";
 
     if ($mysqli->query($sql) === TRUE) {
-        return "New record created successfully";
+        return 0;
     } else {
-        return "Error: " . $sql . "<br>" . $mysqli->error;
+        return -1;
     }
 }

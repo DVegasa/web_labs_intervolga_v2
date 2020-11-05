@@ -102,6 +102,11 @@
         ';
       }
 
+      if (isset($_GET['result'])) {
+        if ($_GET['result'] == 0) echo "Визит запланирован!";
+        if ($_GET['result'] != 0) echo "Произошла ошибка. Повторите запрос";
+      }
+
       while ($v !== NULL) {
         $date = $v['date'];
         $time = $v['time'];
@@ -135,7 +140,7 @@
     </table>
   </div>
 
-  <form id="form_viz" name="form1" method="POST">
+  <form id="form_viz" name="form1" method="POST" action="add_visit.php">
     <br>
     <div id="form0">
       <h1>Запланируйте визит</h1>
@@ -177,39 +182,7 @@
     </div>
   </form>
 
-  <?php
-  if (
-    isset($_POST['date']) &&
-    isset($_POST['time']) &&
-    isset($_POST['sumFrom']) &&
-    isset($_POST['curFrom']) &&
-    isset($_POST['curTo'])
-  ) {
-    require_once "visit_presenter.php";
-
-    print_r($_POST['date']); echo "<br><br>";
-    print_r($_POST['time']); echo "<br><br>";
-    print_r($_POST['sumFrom']); echo "<br><br>";
-    print_r($_POST['curFrom']); echo "<br><br>";
-    print_r($_POST['curTo']); echo "<br><br>";
-    
-    $result = addVisit(
-      $_POST['date'],
-      $_POST['time'],
-      $_POST['sumFrom'],
-      $_POST['curFrom'],
-      $_POST['curTo']
-    );
-    
-    echo "####" . $result; 
-    return;
-    if ($result == 0) { // OK
-      @header("Refresh:0"); // Перезагрузим страницу, чтобы обновить данные
-    } else { // Error 
-
-    }
-  }
-  ?>
+  
 <script>
 	 function zero_first_format(value)
     {
