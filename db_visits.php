@@ -1,6 +1,7 @@
 <?php
 
-function getAllVisitsById($uid) {
+function getAllVisitsById($uid)
+{
     $db_servername = "localhost";
     $db_username = "root";
     $db_password = "";
@@ -11,14 +12,15 @@ function getAllVisitsById($uid) {
     return $result;
 }
 
-function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status) {
+function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status)
+{
     $db_servername = "localhost";
     $db_username = "root";
     $db_password = "";
     $mysqli = new mysqli($db_servername, $db_username, $db_password, "master");
 
     $time = $time . ":00";
-    $sql = 
+    $sql =
         "INSERT INTO `visits` (`userId`, `summaFrom`, `curFrom`, `curTo`, `date`, `time`, `status`) VALUES "
         . "('$userId', $summaFrom, '$curFrom', '$curTo', '$date', '$time', $status)";
 

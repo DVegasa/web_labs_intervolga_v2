@@ -71,7 +71,7 @@
     </div>
     <p>&nbsp;</p>
     <table id="Table1">
-      
+
 
       <?php
       require_once "get_visits.php";
@@ -147,34 +147,36 @@
       <br>
       <label>Веберите дату визита</label>
       <input type="date" name="date" id="date1" required>
-	    <span class="validity"></span>
+      <span class="validity"></span>
       <br>
       <label>Веберите время визита</label>
       <input type="time" name="time" required>
-	    <span class="validity"></span>
+      <span class="validity"></span>
       <br>
       <br>
       <label>Введите сумму для перевода и валюту конвертации
         (точный курс будет известен во время визита)</label>
       <br>
       <input type="number" name="sumFrom" min="0" required>
-	    <span class="validity"></span>
+      <span class="validity"></span>
       <select name="curFrom" size="1">
+        <option>RUB</option>
         <option>USD</option>
         <option>EUR</option>
         <option>GBP</option>
         <option>JPY</option>
         <option>CHF</option>
-        <option>RUB</option>
+        <option>CNY</option>
       </select>
       <label>--></label>
       <select name="curTo" size="1">
         <option>USD</option>
+        <option>RUB</option>
         <option>EUR</option>
         <option>GBP</option>
         <option>JPY</option>
         <option>CHF</option>
-        <option>RUB</option>
+        <option>CNY</option>
       </select>
       <br>
       <br>
@@ -182,37 +184,33 @@
     </div>
   </form>
 
-  
-<script>
-	 function zero_first_format(value)
-    {
-        if (value < 10)
-        {
-            value='0'+value;
-        }
-        return value;
+
+  <script>
+    function zero_first_format(value) {
+      if (value < 10) {
+        value = '0' + value;
+      }
+      return value;
     }
 
-    function date_time()
-    {
-        var current_datetime = new Date();
-        var day = zero_first_format(current_datetime.getDate());
-        var month = zero_first_format(current_datetime.getMonth()+1);
-        var year = current_datetime.getFullYear();
+    function date_time() {
+      var current_datetime = new Date();
+      var day = zero_first_format(current_datetime.getDate());
+      var month = zero_first_format(current_datetime.getMonth() + 1);
+      var year = current_datetime.getFullYear();
 
-        return year+"-"+month+"-"+day;
+      return year + "-" + month + "-" + day;
     }
-	function date_time_max()
-    {
-        var current_datetime = new Date();
-        var day = zero_first_format(current_datetime.getDate());
-        var month = zero_first_format(current_datetime.getMonth()+1);
-        var year = current_datetime.getFullYear()+1;
 
-        return year+"-"+month+"-"+day;
+    function date_time_max() {
+      var current_datetime = new Date();
+      var day = zero_first_format(current_datetime.getDate());
+      var month = zero_first_format(current_datetime.getMonth() + 1);
+      var year = current_datetime.getFullYear() + 1;
+
+      return year + "-" + month + "-" + day;
     }
-	document.getElementById('date1').min=date_time();
-	document.getElementById('date1').max=date_time_max();
-
-</script>
+    document.getElementById('date1').min = date_time();
+    document.getElementById('date1').max = date_time_max();
+  </script>
 </body>

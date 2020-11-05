@@ -21,12 +21,18 @@ function getAllVisitsForCurrentUser()
     return getAllVisitsById($uid);
 }
 
-function statusByCode($status) {
-    switch ($status){
-        case 1: return "Запланирован";
-        case 2: return "Идёт сейчас...";
-        case 3: return "Завершён";
-        case 4: return "Отменён";
-        default: return "Неизвестен";
+function statusByCode($status)
+{
+    switch ($status) {
+        case 1:
+            return "Запланирован";
+        case 2:
+            return "Идёт сейчас...";
+        case 3:
+            return "Завершён";
+        case 4:
+            return "Отменён";
+        default:
+            return "Неизвестен";
     }
 }
