@@ -98,13 +98,24 @@
         <td class="cell0">
           <p>&nbsp;&nbsp;&nbsp;Статус&nbsp;&nbsp;&nbsp;</p>
         </td>
+        <td class="cell0">
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        </td>
       </tr>
         ';
       }
 
       if (isset($_GET['result'])) {
-        if ($_GET['result'] == 0) echo "Визит запланирован!";
-        if ($_GET['result'] != 0) echo "Произошла ошибка. Повторите запрос";
+        switch ($_GET['result']) {
+          case 0:
+            echo "Визит запланирован!"; break;
+          case -1:
+            echo "Произошла ошибка. Повторите запрос"; break;
+          case 10:
+            echo "Успешно удалено!"; break;
+          case 11:
+            echo "Вы не авторизованы для удаления этой записи"; break;
+        }
       }
 
       while ($v !== NULL) {
@@ -114,6 +125,7 @@
         $curFrom = $v['curFrom'];
         $curTo = $v['curTo'];
         $status = statusByCode($v['status']);
+        $id = $v['id'];
 
         echo '
           <tr>
@@ -132,13 +144,18 @@
           <td class="cell0">
             <p>' . $status . '</p>
           </td>
+          <td class="cell0">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete_visit.php?id=' . $id . '">Удалить</a></p>
+          </td>
       </tr>
         ';
-        $v = $visits->fetch_assoc();
+        $v = $visits->fetch_assoc(); 
       }
       ?>
     </table>
   </div>
+
+
 
   <form id="form_viz" name="form1" method="POST" action="add_visit.php">
     <br>
