@@ -101,6 +101,9 @@
         <td class="cell0">
           <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         </td>
+        <td class="cell0">
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        </td>
       </tr>
         ';
       }
@@ -143,6 +146,9 @@
           </td>
           <td class="cell0">
             <p>' . $status . '</p>
+          </td>
+          <td class="cell0">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; <a href="edit_visit.php?id=' . $id . '">Редактировать</a></p>
           </td>
           <td class="cell0">
             <p>&nbsp;&nbsp;&nbsp;&nbsp; <a href="delete_visit.php?id=' . $id . '">Удалить</a></p>

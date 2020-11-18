@@ -14,6 +14,23 @@ function getAllVisitsById($uid)
     return $result;
 }
 
+function getVisitById($id)
+{
+    $db_servername = "localhost";
+    $db_username = "root";
+    $db_password = "";
+    $mysqli = new mysqli($db_servername, $db_username, $db_password, "master");
+
+    $username = $_SESSION['username'];
+
+    $sql = "SELECT * FROM `visits` WHERE `id` = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result;
+}
+
 function isIdsMatch($visitId, $userId)
 {
     $db_servername = "localhost";

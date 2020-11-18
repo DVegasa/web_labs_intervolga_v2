@@ -21,6 +21,12 @@ function getAllVisitsForCurrentUser()
     return getAllVisitsById($uid);
 }
 
+function _getVisitById($id)
+{
+    require_once "db_visits.php";
+    return getVisitById($id)->fetch_assoc();
+}
+
 function statusByCode($status)
 {
     switch ($status) {
