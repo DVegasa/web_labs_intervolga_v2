@@ -44,10 +44,10 @@ function addVisit($date, $time, $sumFrom, $curFrom, $curTo, $filename)
   return addVisitDb($uid, $sumFrom, $curFrom, $curTo, $date, $time, 1, $filename);
 }
 
-$FILESTORAGE = "./files/storage/";
+
 
 function handleFile() {
-  global $FILESTORAGE;
+  $FILESTORAGE = "files\\storage\\";
   if (!empty($_FILES['userfile']) ?? $_FILES['error'] === UPLOAD_ERR_OK) {
     require_once "db_users.php";
 
