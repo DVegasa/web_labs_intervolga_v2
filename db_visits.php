@@ -46,7 +46,8 @@ function isIdsMatch($visitId, $userId)
     return $result->fetch_array() !== null;
 }
 
-function deleteVisit($id) {
+function deleteVisit($id)
+{
     $db_servername = "localhost";
     $db_username = "root";
     $db_password = "";
@@ -75,4 +76,26 @@ function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status
     $stmt->execute();
     $result = $stmt->get_result();
     return 0;
+}
+
+function updateVisitDb($id, $sumFrom, $curFrom, $curTo, $date, $t, $status)
+{
+    $db_servername = "localhost";
+    $db_username = "root";
+    $db_password = "";
+    $mysqli = new mysqli($db_servername, $db_username, $db_password, "master");
+
+    $t = $t . ":00";
+    $sql =
+        "UPDATE `visits` SET "
+        . "`summaFrom` = ?, "
+        . "`curFrom` = ?, "
+        . "`curTo` = ?, "
+        . "`date` = ?, "
+        . "`time` = ?, "
+        . "`status` = ? "
+        . "WHERE `id` = ?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param('issssii', $sumFrom, $curFrom, $curTo, $date, $t, $status, $id);
+    $stmt->execute();
 }

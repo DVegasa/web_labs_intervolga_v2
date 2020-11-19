@@ -57,7 +57,7 @@
     <form id="form_viz" name="form1" method="POST" action="update_visit.php">
         <br>
         <div id="form0">
-            <input type="hidden" name="id">
+            <input type="hidden" name="id" value="<?php echo $v['id'];?>">
             <h1>Редактирование визита</h1>
             <br>
             <label>Веберите дату визита</label>
