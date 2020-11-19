@@ -8,12 +8,18 @@ if (
 ) {
   require_once "get_visits.php";
 
+  $filename = handleFile();
+  if ($filename === '-1') {
+    @header("Location: account.php?result=" . -2);
+  }
+
   $result = addVisit(
     $_POST['date'],
     $_POST['time'],
     $_POST['sumFrom'],
     $_POST['curFrom'],
-    $_POST['curTo']
+    $_POST['curTo'],
+    $filename
   );
 
   @header("Location: account.php?result=" . $result);
@@ -21,7 +27,7 @@ if (
   @header("Location: account.php");
 }
 
-function addVisit($date, $time, $sumFrom, $curFrom, $curTo)
+function addVisit($date, $time, $sumFrom, $curFrom, $curTo, $filename)
 {
   require_once "db_users.php";
   require_once "db_visits.php";
@@ -35,5 +41,28 @@ function addVisit($date, $time, $sumFrom, $curFrom, $curTo)
     header("location: log-in.php");
   }
 
-  return addVisitDb($uid, $sumFrom, $curFrom, $curTo, $date, $time, 1);
+  return addVisitDb($uid, $sumFrom, $curFrom, $curTo, $date, $time, 1, $filename);
+}
+
+$FILESTORAGE = "./files/storage/";
+
+function handleFile() {
+  global $FILESTORAGE;
+  if (!empty($_FILES['userfile']) ?? $_FILES['error'] === UPLOAD_ERR_OK) {
+    require_once "db_users.php";
+
+    $f = $_FILES['userfile'];
+    $parts = pathinfo($f['name']);
+    
+    $name = "uid" . getCurUserId() . "_" . time() . "_" . rand(1000, 9999) 
+                                                                    . "." . $parts['extension'];
+
+    $success = move_uploaded_file($f['tmp_name'], $FILESTORAGE . $name);
+
+    if (!$success) {
+      return '-1';
+    }
+    chmod($FILESTORAGE . $name, 0644);
+    return $name;
+  }
 }

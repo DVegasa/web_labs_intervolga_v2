@@ -59,7 +59,7 @@ function deleteVisit($id)
     $stmt->execute();
 }
 
-function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status)
+function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status, $filename)
 {
     $db_servername = "localhost";
     $db_username = "root";
@@ -68,11 +68,11 @@ function addVisitDb($userId, $summaFrom, $curFrom, $curTo, $date, $time, $status
 
     $time = $time . ":00";
     $sql =
-        "INSERT INTO `visits` (`userId`, `summaFrom`, `curFrom`, `curTo`, `date`, `time`, `status`) VALUES "
-        . "(?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO `visits` (`userId`, `summaFrom`, `curFrom`, `curTo`, `date`, `time`, `status`, `filename`) VALUES "
+        . "(?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $mysqli->prepare($sql);
-    $stmt->bind_param('iissssi', $userId, $summaFrom, $curFrom, $curTo, $date, $time, $status);
+    $stmt->bind_param('iissssis', $userId, $summaFrom, $curFrom, $curTo, $date, $time, $status, $filename);
     $stmt->execute();
     $result = $stmt->get_result();
     return 0;
