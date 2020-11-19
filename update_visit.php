@@ -25,6 +25,8 @@ if (
     );
 
     @header("Location: account.php?result=" . $result);
+} else {
+    @header("Location: account.php");
 }
 
 function updateVisit($id, $date, $time, $sumFrom, $curFrom, $curTo)

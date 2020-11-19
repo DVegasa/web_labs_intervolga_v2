@@ -14,4 +14,6 @@ if (
     }
 
     @header("Location: account.php?result=" . $result);
+} else {
+    @header("Location: account.php");
 }

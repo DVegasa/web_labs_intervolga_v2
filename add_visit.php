@@ -17,6 +17,8 @@ if (
   );
 
   @header("Location: account.php?result=" . $result);
+} else {
+  @header("Location: account.php");
 }
 
 function addVisit($date, $time, $sumFrom, $curFrom, $curTo)

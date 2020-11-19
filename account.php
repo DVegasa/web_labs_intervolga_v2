@@ -111,15 +111,20 @@
       if (isset($_GET['result'])) {
         switch ($_GET['result']) {
           case 0:
-            echo "Визит запланирован!"; break;
+            echo "Визит запланирован!";
+            break;
           case -1:
-            echo "Произошла ошибка. Повторите запрос"; break;
+            echo "Произошла ошибка. Повторите запрос";
+            break;
           case 10:
-            echo "Успешно удалено!"; break;
+            echo "Успешно удалено!";
+            break;
           case 11:
-            echo "Вы не авторизованы для удаления этой записи"; break;
+            echo "Вы не авторизованы для удаления этой записи";
+            break;
           case 20:
-            echo "Визит отредактирован"; break;
+            echo "Визит отредактирован";
+            break;
         }
       }
 
@@ -157,7 +162,7 @@
           </td>
       </tr>
         ';
-        $v = $visits->fetch_assoc(); 
+        $v = $visits->fetch_assoc();
       }
       ?>
     </table>
@@ -165,7 +170,7 @@
 
 
 
-  <form id="form_viz" name="form1" method="POST" action="add_visit.php">
+  <form id="form_viz" name="form1" method="POST" enctype="multipart/form-data" action="add_visit.php">
     <br>
     <div id="form0">
       <h1>Запланируйте визит</h1>
@@ -203,6 +208,10 @@
         <option>CHF</option>
         <option>CNY</option>
       </select>
+      <br>
+      Подтверждающий документ (паспорт, ВУ, студенческий) <br>
+      <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+      <input name="userfile" required type="file" />
       <br>
       <br>
       <button id="bt" type="submit">Запланировать</button>
