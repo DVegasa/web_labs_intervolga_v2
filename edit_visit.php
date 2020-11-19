@@ -51,7 +51,6 @@
 
     require_once "get_visits.php";
     $v = _getVisitById($_GET['id']);
-    print_r($v);
     ?>
 
 
@@ -62,37 +61,37 @@
             <h1>Редактирование визита</h1>
             <br>
             <label>Веберите дату визита</label>
-            <input type="date"  name="date" id="date1" required>
+            <input type="date" name="date" value="<?php echo $v['date']; ?>" id="date1" required>
             <span class="validity"></span>
             <br>
             <label>Веберите время визита</label>
-            <input type="time" name="time" required>
+            <input type="time" name="time" value="<?php echo $v['time']; ?>" required>
             <span class="validity"></span>
             <br>
             <br>
             <label>Введите сумму для перевода и валюту конвертации
                 (точный курс будет известен во время визита)</label>
             <br>
-            <input type="number" name="sumFrom" min="0" required>
+            <input type="number" name="sumFrom" value="<?php echo $v['summaFrom']; ?>" min="0" required>
             <span class="validity"></span>
-            <select name="curFrom" default="EUR" size="1">
-                <option>RUB</option>
-                <option>USD</option>
-                <option>EUR</option>
-                <option>GBP</option>
-                <option>JPY</option>
-                <option>CHF</option>
-                <option>CNY</option>
+            <select name="curFrom" size="1">
+                <option <?php if ($v['curFrom'] == 'RUB') echo "selected"; ?>>RUB</option>
+                <option <?php if ($v['curFrom'] == 'USD') echo "selected"; ?>>USD</option>
+                <option <?php if ($v['curFrom'] == 'EUR') echo "selected"; ?>>EUR</option>
+                <option <?php if ($v['curFrom'] == 'GBP') echo "selected"; ?>>GBP</option>
+                <option <?php if ($v['curFrom'] == 'JPY') echo "selected"; ?>>JPY</option>
+                <option <?php if ($v['curFrom'] == 'CHF') echo "selected"; ?>>CHF</option>
+                <option <?php if ($v['curFrom'] == 'CNY') echo "selected"; ?>>CNY</option>
             </select>
             <label>--></label>
             <select name="curTo" size="1">
-                <option>USD</option>
-                <option>RUB</option>
-                <option>EUR</option>
-                <option>GBP</option>
-                <option>JPY</option>
-                <option>CHF</option>
-                <option>CNY</option>
+                <option <?php if ($v['curTo'] == 'USD') echo "selected"; ?>>USD</option>
+                <option <?php if ($v['curTo'] == 'RUB') echo "selected"; ?>>RUB</option>
+                <option <?php if ($v['curTo'] == 'EUR') echo "selected"; ?>>EUR</option>
+                <option <?php if ($v['curTo'] == 'GBP') echo "selected"; ?>>GBP</option>
+                <option <?php if ($v['curTo'] == 'JPY') echo "selected"; ?>>JPY</option>
+                <option <?php if ($v['curTo'] == 'CHF') echo "selected"; ?>>CHF</option>
+                <option <?php if ($v['curTo'] == 'CNY') echo "selected"; ?>>CNY</option>
             </select>
             <br>
             <br>
