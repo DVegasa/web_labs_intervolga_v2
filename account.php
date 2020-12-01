@@ -138,7 +138,10 @@
       }
       ?>
     </table>
+	<button type="submit" id="bt_plan" onClick="show_vizit()">Запланировать визит</button>
+	<button type="submit" id="bt_edit" onClick="show_edit()">Редактировать</button>
   </div>
+  
 
   <form id="form_viz" name="form1" method="POST" action="add_visit.php">
     <br>
@@ -180,12 +183,66 @@
       </select>
       <br>
       <br>
-      <button id="bt" type="submit">Запланировать</button>
+      <button id="bt" type="submit" onClick="plan()">Запланировать</button>
     </div>
   </form>
-
+<div id="form_edit">
+      <h1>Редактирование визита</h1>
+      <br>
+      <label>Веберите дату визита</label>
+      <input type="date" name="date" id="date1" required>
+      <span class="validity"></span>
+      <br>
+      <label>Веберите время визита</label>
+      <input type="time" name="time" required>
+      <span class="validity"></span>
+      <br>
+      <br>
+      <label>Введите сумму для перевода и валюту конвертации
+        (точный курс будет известен во время визита)</label>
+      <br>
+      <input type="number" name="sumFrom" min="0" required>
+      <span class="validity"></span>
+      <select name="curFrom" size="1">
+        <option>RUB</option>
+        <option>USD</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>JPY</option>
+        <option>CHF</option>
+        <option>CNY</option>
+      </select>
+      <label>--></label>
+      <select name="curTo" size="1">
+        <option>USD</option>
+        <option>RUB</option>
+        <option>EUR</option>
+        <option>GBP</option>
+        <option>JPY</option>
+        <option>CHF</option>
+        <option>CNY</option>
+      </select>
+      <br>
+      <br>
+      <button id="bt" type="submit" onClick="edit()">Редактировать</button>
+    </div>
 
   <script>
+	 function show_vizit(){
+		document.getElementById("form0").style.display = "block";
+		document.getElementById("bt_plan").style.display = "none";
+	 }
+	 function plan(){
+		document.getElementById("form0").style.display = "none";
+	 }
+	 function edit(){
+		document.getElementById("form_edit").style.display = "none";
+	 }
+	 function show_edit(){
+		document.getElementById("form_edit").style.display = "block";
+		document.getElementById("bt_edit").style.display = "none";
+	 }
+	 
     function zero_first_format(value) {
       if (value < 10) {
         value = '0' + value;
